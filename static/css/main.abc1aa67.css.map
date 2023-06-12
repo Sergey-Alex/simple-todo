@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.abc1aa67.css","mappings":"AAAA,6BACI,UAAY,CACZ,4BACJ","sources":["components/todolistItem.module.css"],"sourcesContent":[".is-done {\r\n    opacity: 0.5;\r\n    text-decoration: line-through;\r\n}\r\n"],"names":[],"sourceRoot":""}
