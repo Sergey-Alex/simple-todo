@@ -2,12 +2,14 @@ import React, {ChangeEvent, KeyboardEvent, useReducer, useState} from "react";
 import TodoListItem from "./components/TodoListItem";
 import {
     addTodolistAC,
-    checkedTaskAC, clearAC,
+    checkedTaskAC,
+    clearAC,
     filterChangeAC,
     FilterValuesType,
     StateType,
     todolistReducers
 } from "./reducer/TodolistReducers";
+import {Button, Card, TextField} from "@mui/material";
 
 
 export const App = () => {
@@ -52,24 +54,30 @@ export const App = () => {
         filteredTasks = todolist.tasks.filter(t => t.check)
     }
     return (
-        <div>
-            <input value={value} onChange={onChangeHandler}
+        <Card  sx={{ display: 'inline-block', mx: '200px', height: "auto", padding:'20px' }} >
+            <TextField error={!!error}
+                       label='Press enter' value={value} onChange={onChangeHandler}
                    onKeyPress={keyPressHandler}/>
             {filteredTasks.map(task => {
                 return (<TodoListItem
                         key = {task.id}
-                        addTask={addTask}
                         task={task}
                         changeTaskStatus={changeTaskStatus}
-                        changeTaskFilter={changeTaskFilter}
                     />
                 )
             })}
-            <button onClick={() => changeTaskFilter('all')}>All</button>
-            <button onClick={() => changeTaskFilter('active')}>Active</button>
-            <button onClick={() => changeTaskFilter('completed')}> Completed</button>
-            <button onClick={clearTasksStatuses}>Clear completed</button>
-        </div>
+            <div>
+                <Button variant={todolist.filter === 'all' ? 'outlined':'text'}
+                        onClick={() => changeTaskFilter('all')}>All</Button>
+                <Button variant={todolist.filter === 'active' ? 'outlined':'text'}
+                        onClick={() => changeTaskFilter('active')}>Active</Button>
+                <Button variant={todolist.filter === 'completed' ? 'outlined':'text'}
+                        onClick={() => changeTaskFilter('completed')}>Completed</Button>
+                <Button variant={todolist.filter === 'clear' ? 'contained':'text'}
+                        onClick={clearTasksStatuses}>Clear completed</Button>
+            </div>
+
+        </Card>
     )
 
 }
